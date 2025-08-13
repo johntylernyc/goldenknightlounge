@@ -1,0 +1,25 @@
+# Replit configuration for Golden Knight Lounge
+
+run = "bash scripts/start.sh"
+language = "python3"
+
+[env]
+PYTHONPATH = "${PYTHONPATH}:${REPL_HOME}/backend/src"
+
+[packager]
+language = "python3"
+
+[packager.features]
+packageSearch = true
+guessImports = true
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[[ports]]
+localPort = 5000
+externalPort = 5000
+
+[nix]
+channel = "stable-22_11"
