@@ -181,6 +181,44 @@ git push origin staging
 3. Test your changes in staging environment
 4. Check Replit staging console for any errors
 
+### Keeping Staging in Sync with Main
+
+Before deploying new features to staging, ensure staging has all production changes:
+
+#### Option 1: Merge Main into Staging (Recommended)
+```bash
+# Ensure you have latest main
+git checkout main
+git pull origin main
+
+# Merge main into staging
+git checkout staging
+git pull origin staging
+git merge main
+
+# Resolve any conflicts if they exist
+# Then push the updated staging branch
+git push origin staging
+```
+
+#### Option 2: Reset Staging to Main (Clean Slate)
+```bash
+# WARNING: This will discard any staging-only changes
+git checkout main
+git pull origin main
+
+# Force staging to match main exactly
+git checkout staging
+git reset --hard main
+git push origin staging --force
+```
+
+#### Option 3: Via GitHub UI
+1. Go to your repository on GitHub
+2. Click "Pull requests" → "New pull request"
+3. Set base: `staging`, compare: `main`
+4. Create and merge the PR to bring main changes into staging
+
 ### Staging to Production Workflow
 
 #### Step 1: Create Pull Request
