@@ -1,4 +1,6 @@
 # Golden Knight Lounge
+Version: 1.0.0  
+Last Updated: August 2025
 
 Fantasy Baseball Analytics Platform
 
