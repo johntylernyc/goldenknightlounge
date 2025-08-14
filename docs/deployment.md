@@ -34,10 +34,12 @@ git push -u origin staging
 2. Create new Repl → Import from GitHub
 3. Select your repository and `main` branch
 4. Name it `goldenknightlounge`
-5. Add secrets (Settings → Secrets):
+5. Go to Deployments → Configure
+6. Set run command: `bash scripts/start.sh`
+7. Add secrets (Deployments → Secrets):
    - All variables from `.env.example`
    - Set `NODE_ENV=production`
-   - Set proper `DATABASE_URL`
+   - Set proper `DATABASE_URL` (auto-provisioned)
    - Configure `CORS_ORIGINS` and `ALLOWED_HOSTS`
 
 ### Staging Environment
@@ -45,9 +47,11 @@ git push -u origin staging
 1. Create another Repl
 2. Import same repository but select `staging` branch
 3. Name it `goldenknightlounge-staging`
-4. Add secrets with staging values:
+4. Go to Deployments → Configure
+5. Set run command: `bash scripts/start.sh`
+6. Add secrets with staging values:
    - Set `NODE_ENV=staging`
-   - Use separate staging database
+   - Use separate staging database (auto-provisioned)
 
 ## Step 3: Domain Configuration (Cloudflare)
 
@@ -60,12 +64,12 @@ git push -u origin staging
    ```
    Type: CNAME
    Name: @
-   Target: goldenknightlounge.repl.co
+   Target: goldenknightlounge-johntylernyc.replit.app
    Proxy: ON (orange cloud)
    
    Type: CNAME
    Name: www
-   Target: goldenknightlounge.repl.co
+   Target: goldenknightlounge-johntylernyc.replit.app
    Proxy: ON (orange cloud)
    ```
 
@@ -75,7 +79,7 @@ git push -u origin staging
    ```
    Type: CNAME
    Name: staging
-   Target: goldenknightlounge-staging.repl.co
+   Target: goldenknightlounge-staging-johntylernyc.replit.app
    Proxy: ON (orange cloud)
    ```
 
@@ -84,8 +88,8 @@ git push -u origin staging
 ### For each Replit project:
 
 1. Go to your Repl
-2. Click on "Webview" tab
-3. Click domain settings (pencil icon)
+2. Navigate to Deployments tab
+3. Click on Settings
 4. Add custom domain:
    - Production: `goldenknightlounge.com` and `www.goldenknightlounge.com`
    - Staging: `staging.goldenknightlounge.com`
@@ -93,17 +97,17 @@ git push -u origin staging
 
 ## Step 5: Enable Always On (Production)
 
-1. In production Repl settings
-2. Enable "Always On" (requires Replit subscription)
+1. In production Repl Deployments settings
+2. Enable "Always On" (requires paid Replit plan)
 3. This ensures your app doesn't sleep
 
 ## Step 6: Database Setup
 
 ### PostgreSQL on Replit
 
-1. In your Repl, go to "Tools" → "Database"
-2. Create PostgreSQL database
-3. Copy connection string to secrets as `DATABASE_URL`
+1. PostgreSQL is auto-provisioned for Deployments
+2. Database URL is automatically set as `DATABASE_URL`
+3. Separate databases for staging and production
 
 ## Step 7: Verify Deployment
 

@@ -17,14 +17,15 @@ A comprehensive fantasy baseball application that ingests Yahoo! Fantasy Basebal
 
 ### 1. Issue-Driven Development
 
-#### Slash Commands for GitHub Workflow
-- `/create-issue "[description]"` - Translates requirements into GitHub issue draft
-- `/review-issue #[issue-number]` - Reviews existing issue and plans implementation
-- `/review-pr #[pr-number]` - Reviews pull request for completeness and quality
+#### GitHub Workflow Commands
+Command templates for GitHub workflows are available in `.claude/commands/`:
+- **Create Issue**: See `.claude/commands/create-issue.md` for translating requirements into GitHub issue drafts
+- **Review Issue**: See `.claude/commands/review-issue.md` for analyzing existing issues and planning implementation
+- **Review PR**: See `.claude/commands/review-pr.md` for reviewing pull requests for completeness and quality
 
 #### Issue Creation Workflow
-1. **Option A**: User describes feature/bug → Use `/create-issue` → Claude drafts issue as an ephemeral .md file → User reviews/edits → Create in GitHub
-2. **Option B**: User creates issue directly in GitHub → Use `/review-issue` to analyze
+1. **Option A**: User describes feature/bug → Use create-issue command → Claude drafts issue as an ephemeral .md file → User reviews/edits → Create in GitHub
+2. **Option B**: User creates issue directly in GitHub → Use review-issue command to analyze
 
 #### Development Flow
 1. Create or review GitHub issue with clear requirements
@@ -52,6 +53,8 @@ A comprehensive fantasy baseball application that ingests Yahoo! Fantasy Basebal
 goldenknightlounge/
   CLAUDE.md                    # This file - primary development reference
   README.md                    # User-facing documentation
+  .claude/
+    commands/                  # Command templates for common workflows
   .github/
     workflows/                 # GitHub Actions CI/CD
     ISSUE_TEMPLATE/            # Issue templates
@@ -242,7 +245,7 @@ As a [type of user], I want [goal] so that [benefit].
 [feature, enhancement, data-pipeline, frontend, backend, etc.]
 ```
 
-**Note**: Technical requirements (API endpoints, database changes, data sources) will be determined by Claude during the `/review-issue` phase, ensuring implementation details align with the existing codebase and architecture.
+**Note**: Complete technical requirements (API endpoints, database changes, data sources) will be determined by Claude during the issue review phase, ensuring implementation details align with the existing codebase and architecture.
 
 ### Bug Issue Template
 ```markdown
