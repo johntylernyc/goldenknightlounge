@@ -40,12 +40,8 @@ NODE_ENV=development
 API_PORT=5000
 PORT=3000
 
-# Database (choose one)
-# Option 1: Local PostgreSQL
-DATABASE_URL=postgresql://localhost:5432/goldenknightlounge_dev
-
-# Option 2: SQLite for development (simpler)
-DATABASE_URL=sqlite:///goldenknightlounge.db
+# Database - PostgreSQL (required)
+DATABASE_URL=postgresql://postgres:yourpassword@localhost:5432/goldenknightlounge_dev
 
 # Yahoo OAuth (for testing OAuth)
 YAHOO_CLIENT_ID=your_dev_client_id
@@ -83,30 +79,97 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-### 2. Install Dependencies
+### 2. PostgreSQL Setup (Required)
+
+#### Windows Setup
+
+1. **Install PostgreSQL**:
+   - Download from https://www.postgresql.org/download/windows/
+   - Run installer (version 15 or 16 recommended)
+   - Remember your postgres password
+   - Default port: 5432
+
+2. **Add to PATH** (if not done by installer):
+   ```powershell
+   # Add to System PATH (run as Administrator)
+   $postgresPath = "C:\Program Files\PostgreSQL\16\bin"
+   [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$postgresPath", [EnvironmentVariableTarget]::Machine)
+   ```
+
+3. **Create Development Database**:
+   ```bash
+   # Open new terminal after PATH update
+   psql -U postgres
+   # Enter your postgres password
+   
+   # In psql prompt:
+   CREATE DATABASE goldenknightlounge_dev;
+   \q
+   ```
+
+#### Mac/Linux Setup
 
 ```bash
+# Mac with Homebrew
+brew install postgresql
+brew services start postgresql
+createdb goldenknightlounge_dev
+
+# Ubuntu/Debian
+sudo apt-get install postgresql postgresql-contrib
+sudo systemctl start postgresql
+sudo -u postgres createdb goldenknightlounge_dev
+```
+
+### 3. Install Python Dependencies
+
+#### For Python 3.13 on Windows
+
+If you encounter issues with psycopg2-binary on Python 3.13:
+
+**Option 1: Install Build Tools** (Recommended)
+```bash
+# 1. Install Microsoft C++ Build Tools
+# Download from: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+# Install "Desktop development with C++" workload
+
+# 2. Install psycopg2 (not binary)
+pip install psycopg2
+
+# 3. Install rest of requirements
 pip install -r requirements.txt
 ```
 
-### 3. Database Setup
-
-#### Option A: PostgreSQL
+**Option 2: Use Python 3.12**
 ```bash
-# Install PostgreSQL locally
-# Create database
-createdb goldenknightlounge_dev
-
-# Tables are auto-created on first run
+# Install Python 3.12 from python.org
+# Create venv with Python 3.12
+py -3.12 -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
-#### Option B: SQLite (Easier for Development)
+#### For Other Systems
+
 ```bash
-# No setup needed - file created automatically
-# Just ensure DATABASE_URL uses sqlite:///
+# Should work without issues
+pip install -r requirements.txt
 ```
 
-### 4. Run Backend Server
+### 4. Configure Database Connection
+
+Update your `.env` file:
+```bash
+# Local PostgreSQL
+DATABASE_URL=postgresql://postgres:yourpassword@localhost:5432/goldenknightlounge_dev
+
+# Or if using different user
+DATABASE_URL=postgresql://username:password@localhost:5432/goldenknightlounge_dev
+```
+
+The database tables will be automatically created on first run when the application starts.
+
+### 5. Run Backend Server
 
 ```bash
 # From backend directory with venv activated
