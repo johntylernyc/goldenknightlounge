@@ -1,4 +1,49 @@
-# Deployment Guide
+# Deployment Documentation Hub
+
+Welcome to the deployment documentation for Golden Knight Lounge. This documentation is organized into three main guides:
+
+## 📚 Documentation Structure
+
+### 1. [Initial Deployment Setup](./initial-deployment.md)
+**For first-time setup only**
+- GitHub repository configuration
+- Replit project creation
+- Domain setup with Cloudflare
+- Yahoo app registration
+- Database initialization
+
+### 2. [Development Workflow](./development-workflow.md) 
+**For day-to-day development**
+- Branch strategy (Feature → Staging → Production)
+- Creating and reviewing pull requests
+- Testing in staging environment
+- Deploying to production
+- Rollback procedures
+
+### 3. [Local Testing Guide](./local-testing.md)
+**For local development**
+- Setting up development environment
+- Running backend and frontend locally
+- Testing OAuth with ngrok
+- Running tests and linting
+- Troubleshooting common issues
+
+## Quick Start
+
+If you're new to the project:
+1. Start with [Initial Deployment Setup](./initial-deployment.md)
+2. Set up your [Local Testing](./local-testing.md) environment
+3. Learn the [Development Workflow](./development-workflow.md)
+
+If you're ready to contribute:
+1. Review the [Development Workflow](./development-workflow.md)
+2. Check [Local Testing](./local-testing.md) for testing procedures
+
+---
+
+## Legacy Documentation
+
+The content below is maintained for reference but has been reorganized into the guides above.
 
 ## Prerequisites
 
