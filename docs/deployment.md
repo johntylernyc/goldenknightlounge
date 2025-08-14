@@ -140,15 +140,154 @@ git push -u origin staging
 - Include all domain variations
 - Check backend CORS configuration
 
+## Ongoing Deployment Process
+
+### Development to Staging Workflow
+
+#### Step 1: Make Changes Locally
+```bash
+# Create feature branch from main
+git checkout main
+git pull origin main
+git checkout -b feature/your-feature-name
+
+# Make your changes
+# Test locally
+# Commit changes
+git add .
+git commit -m "Your commit message"
+```
+
+#### Step 2: Deploy to Staging
+```bash
+# Push feature branch to GitHub
+git push origin feature/your-feature-name
+
+# Create PR to staging branch on GitHub
+# OR merge directly to staging for quick testing:
+git checkout staging
+git merge feature/your-feature-name
+git push origin staging
+```
+
+#### Step 3: Automatic Staging Deployment
+- **GitHub Actions**: Automatically runs tests when you push to staging
+- **Replit Staging**: Automatically deploys when staging branch is updated
+- **No manual action needed in Replit** - it auto-deploys on git push
+
+#### Step 4: Verify Staging Deployment
+1. Check GitHub Actions tab for build status
+2. Visit https://staging.goldenknightlounge.com (or staging Replit URL)
+3. Test your changes in staging environment
+4. Check Replit staging console for any errors
+
+### Staging to Production Workflow
+
+#### Step 1: Create Pull Request
+```bash
+# On GitHub, create PR from staging to main
+# OR via CLI:
+gh pr create --base main --head staging --title "Deploy to production"
+```
+
+#### Step 2: Review and Merge
+1. Review changes in PR
+2. Ensure all CI checks pass
+3. Merge PR on GitHub (this triggers production deployment)
+
+#### Step 3: Automatic Production Deployment
+- **GitHub Actions**: Runs final tests on main branch
+- **Replit Production**: Automatically deploys when main branch is updated
+- **No manual action needed in Replit** - it auto-deploys on merge
+
+#### Step 4: Verify Production Deployment
+1. Check GitHub Actions tab for deployment status
+2. Visit https://goldenknightlounge.com
+3. Monitor for any issues
+
+### Quick Reference: What Happens Where
+
+| Action | GitHub | Replit |
+|--------|--------|--------|
+| Push to `staging` | CI/CD tests run | Auto-deploys to staging |
+| Merge to `main` | CI/CD tests run | Auto-deploys to production |
+| Manual deployment | Not needed | Not needed (auto-deploy) |
+| View logs | Actions tab | Deployments → Logs |
+| Check status | Actions tab | Deployments → Status |
+
+### Rollback Process
+
+If something goes wrong in production:
+
+#### Option 1: Quick Revert (Recommended)
+```bash
+# Revert the last commit on main
+git checkout main
+git pull origin main
+git revert HEAD
+git push origin main
+# This auto-deploys the reverted version
+```
+
+#### Option 2: Deploy Previous Version
+1. Go to Replit production project
+2. Deployments → History
+3. Find previous working deployment
+4. Click "Redeploy" on that version
+
+### Monitoring Your Deployments
+
+#### GitHub Side
+- **Actions Tab**: Shows CI/CD pipeline status
+- **Pull Requests**: Shows test results before merge
+- **Insights → Actions**: Shows deployment history
+
+#### Replit Side
+- **Deployments Tab**: Shows current deployment status
+- **Logs**: Real-time application logs
+- **Metrics**: CPU, memory, request metrics
+- **Domains**: Verify custom domains are connected
+
+### Common Deployment Scenarios
+
+#### Hotfix to Production
+```bash
+# Create hotfix branch from main
+git checkout main
+git checkout -b hotfix/critical-fix
+
+# Make fix
+git add .
+git commit -m "Fix: critical issue"
+
+# Skip staging for critical fixes
+git checkout main
+git merge hotfix/critical-fix
+git push origin main
+```
+
+#### Feature Development
+```bash
+# Feature → Staging → Production
+git checkout -b feature/new-feature
+# develop...
+git push origin feature/new-feature
+# PR to staging → test → PR to main
+```
+
+#### Configuration Changes
+- Update secrets in Replit Deployments → Secrets
+- Changes take effect on next deployment
+- Force redeploy: Deployments → Redeploy button
+
 ## Maintenance
 
-### Updates
-1. Push to `staging` branch first
-2. Test on staging environment
-3. Create PR to `main` branch
-4. Merge after testing
+### Regular Maintenance Tasks
+- Weekly: Review deployment logs for errors
+- Monthly: Check and update dependencies
+- Quarterly: Review and optimize deployment performance
 
 ### Monitoring
-- Check Replit console for logs
-- Monitor GitHub Actions for CI/CD status
-- Set up uptime monitoring (e.g., UptimeRobot)
+- Check Replit deployment status dashboard
+- Monitor GitHub Actions for build failures
+- Set up external monitoring (UptimeRobot, Pingdom)
