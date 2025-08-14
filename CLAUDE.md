@@ -23,7 +23,7 @@ A comprehensive fantasy baseball application that ingests Yahoo! Fantasy Basebal
 - `/review-pr #[pr-number]` - Reviews pull request for completeness and quality
 
 #### Issue Creation Workflow
-1. **Option A**: User describes feature/bug → Use `/create-issue` → Claude drafts issue → User reviews/edits → Create in GitHub
+1. **Option A**: User describes feature/bug → Use `/create-issue` → Claude drafts issue as an ephemeral .md file → User reviews/edits → Create in GitHub
 2. **Option B**: User creates issue directly in GitHub → Use `/review-issue` to analyze
 
 #### Development Flow
