@@ -1,12 +1,17 @@
 """Unit tests for Yahoo OAuth authentication."""
 
 import os
+import sys
 import time
 import json
 import pytest
 from unittest.mock import Mock, patch, MagicMock
-from backend.src.auth.yahoo_oauth import YahooOAuthClient
-from backend.src.auth.token_manager import TokenManager
+
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+
+from auth.yahoo_oauth import YahooOAuthClient
+from auth.token_manager import TokenManager
 
 
 class TestYahooOAuthClient:
@@ -218,7 +223,7 @@ class TestYahooOAuthClient:
         with pytest.raises(Exception, match="Rate limited"):
             oauth_client.make_api_request('test/endpoint')
     
-    @patch('backend.src.auth.yahoo_oauth.YahooOAuthClient.make_api_request')
+    @patch('auth.yahoo_oauth.YahooOAuthClient.make_api_request')
     def test_test_connection_success(self, mock_api_request, oauth_client):
         """Test successful connection test."""
         mock_api_request.return_value = {'games': []}
@@ -227,7 +232,7 @@ class TestYahooOAuthClient:
         assert result is True
         mock_api_request.assert_called_once_with('users;use_login=1/games')
     
-    @patch('backend.src.auth.yahoo_oauth.YahooOAuthClient.make_api_request')
+    @patch('auth.yahoo_oauth.YahooOAuthClient.make_api_request')
     def test_test_connection_failure(self, mock_api_request, oauth_client):
         """Test failed connection test."""
         mock_api_request.side_effect = Exception('Connection failed')

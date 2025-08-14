@@ -172,8 +172,12 @@ The database tables will be automatically created on first run when the applicat
 ### 5. Run Backend Server
 
 ```bash
-# From backend directory with venv activated
-python src/app.py
+# From backend/src directory with venv activated
+cd backend/src
+python app.py
+
+# Or from project root
+python -m backend.src.app
 
 # Server runs at http://localhost:5000
 # Test with: curl http://localhost:5000/api/health
@@ -250,6 +254,7 @@ YAHOO_REDIRECT_URI=https://abc123.ngrok.io/api/auth/callback
 ### Backend Tests
 
 ```bash
+# From backend directory
 cd backend
 
 # Run all tests
@@ -263,6 +268,9 @@ pytest tests/test_yahoo_oauth.py -v
 
 # Run specific test
 pytest tests/test_yahoo_oauth.py::TestYahooOAuthClient::test_initialization -v
+
+# If you get import errors, run from project root:
+python -m pytest backend/tests/ -v
 ```
 
 ### Linting and Code Quality

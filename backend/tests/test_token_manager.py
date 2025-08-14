@@ -1,12 +1,17 @@
 """Unit tests for token manager."""
 
 import os
+import sys
 import time
 import pytest
 from datetime import datetime, timedelta
 from unittest.mock import Mock, patch, MagicMock
 from cryptography.fernet import Fernet
-from backend.src.auth.token_manager import TokenManager
+
+# Add parent directory to path for imports
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+
+from auth.token_manager import TokenManager
 
 
 class TestTokenManager:

@@ -4,7 +4,7 @@ import os
 import secrets
 import logging
 from flask import Blueprint, request, redirect, jsonify, session, url_for
-from backend.src.auth import YahooOAuthClient, TokenManager
+from auth import YahooOAuthClient, TokenManager
 
 logger = logging.getLogger(__name__)
 
