@@ -17,4 +17,4 @@ The issue should include:
 
 Technical requirements will be determined during the review phase.
 
-Save the draft to `GITHUB_ISSUE_DRAFT.md` in the project root for easy copying.
+Generate a filename based on the issue type and a brief kebab-case description (e.g., `feature_yahoo-oauth.md` or `bug_data-pipeline-error.md`). Save the draft to this dynamically named file in ..\.github\issues.

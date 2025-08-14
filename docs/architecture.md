@@ -33,9 +33,9 @@ Fantasy Baseball Analytics Platform - A comprehensive application for Yahoo! Fan
 - **Technology**: PostgreSQL
 - **Purpose**: Persistent data storage
 - **Schema Categories**:
-  - Core tables (leagues, teams, players)
-  - Analytics tables (stats, projections)
-  - Audit tables (data_loads, api_calls)
+  - Core tables (leagues, teams, players, transactions, managers, seasons, drafts)
+  - Analytics tables (player_stats, projections, standings)
+  - Audit tables (data_jobs, api_calls)
 
 ## Data Flow
 

@@ -56,8 +56,8 @@ goldenknightlounge/
   .claude/
     commands/                  # Command templates for common workflows
   .github/
+    issues/                    # Drafted issues for our GitHub repo
     workflows/                 # GitHub Actions CI/CD
-    ISSUE_TEMPLATE/            # Issue templates
   docs/
     architecture.md            # System architecture
     infrastructure.md          # Infrastructure details
@@ -154,7 +154,7 @@ python backend\src\migrate.py up
 ## Database Schema Overview
 - **Core Tables**: leagues, teams, players, transactions, managers, seasons, drafts
 - **Analytics Tables**: player_stats, projections, standings
-- **Audit Tables**: data_loads, api_calls, data_job
+- **Audit Tables**: data_jobs, api_calls
 - **Indexes**: Optimized for common query patterns
 
 ## Testing Requirements
